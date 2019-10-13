@@ -1,0 +1,13 @@
+#navbar {
+    padding-left: 9%;
+}
+
+body {
+    background: #EEE;
+}
+
+
+#signin-button a {
+    color: #FFF;
+    text-decoration: none;
+}
