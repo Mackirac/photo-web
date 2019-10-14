@@ -7,24 +7,98 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <title>Photo Web</title>
-</head>
-<body>
-    <header>
-        <h1>Photo Web</h1>
-        <ul>
-            <li>File</li>
-            <li>Edit</li>
-            <li>Select</li>
-            <li>View</li>
-            <li>Filters</li>
-            <li>...</li>
-        </ul>
-    </header>
+    <h4 href="#" id="apptitle">PhotoWeb</h4>
 
+    <nav class="navbar navbar-expand-lg navbar-light" id="appmenu-navbar">
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        File
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">New</a>
+                        <a class="dropdown-item" href="#">Open</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Edit
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Undo</a>
+                        <a class="dropdown-item" href="#">Cut</a>
+                    </div>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Image</a>
+                        
+                    </div>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        View
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Zoom In</a>
+                        <a class="dropdown-item" href="#">Zoom Out</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Filters
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Gamma Fix</a>
+                        <a class="dropdown-item" href="#">Negative</a>
+                        <a class="dropdown-item" href="#">Mean Blur</a>
+                        <a class="dropdown-item" href="#">Gaussian Blur</a>
+                        <a class="dropdown-item" href="#">Laplacian Shapening</a>
+                        <a class="dropdown-item" href="#">etc</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Help
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="https://github.com/Mackirac/photo-web" target="_blank">About PhotoWeb</a>
+                    </div>
+                </li>
+
+                
+            </ul>
+           
+        </div>
+    </nav>
+
+    
+    <br>
+
+    <div class="container" id="square">
+        IMAGE
+    </div>
     
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
