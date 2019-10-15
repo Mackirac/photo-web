@@ -5,7 +5,7 @@ class Filter:
     def __init__ (self, dx, dy, data, divisor):
         if len(data) != (1 + 2*dx) * (1 + 2*dy):
             raise Exception("Invalid data length")
-        if divisor == 0: raise Exception("0 divisor error")
+        if divisor == 0: raise ZeroDivisionError()
         self.dx, self.dy, self.data, self.divisor =\
             dx, dy, tuple(data), divisor
     
@@ -30,20 +30,22 @@ def apply_filter (image, x, y, filter):
     pixel = np.array([0] * len(image.getbands()))
     for i in range(len(neighborhood)):
         pixel += neighborhood[i] * filter.data[i]
-    return tuple(map(lambda p: int(p / filter.divisor), pixel))
+    return pixel / filter.divisor
 
 def conv (image, filter):
-    black = tuple([0] * len(image.getbands()))
-    output = Image.new(image.mode, image.size, black)
-    for x in range(image.width):
-        for y in range(image.height):
-            output.putpixel((x, y), apply_filter(image, x, y, filter))
-    return output
-
-im = Image.open('images/image.bmp')
-im.show()
-conv(im, Filter(1, 1, np.array([
-    0, -1, 0,
-    -1, 0, 1,
-    0, 1, 0
-]), 1)).show()
+    bands = len(image.getbands())
+    output = []
+    minp, maxp = [0] * bands, [0] * bands
+    for y in range(image.height):
+        for x in range(image.width):
+            pixel = apply_filter(image, x, y, filter)
+            for c in range(bands):
+                if pixel[c] < minp[c]: minp[c] = pixel[c]
+                if pixel[c] > maxp[c]: maxp[c] = pixel[c]
+                output.append(pixel[c])
+    for idx in range(0, len(output), bands):
+        for c in range(bands):
+            output[idx + c] -= minp[c]
+            output[idx + c] *= 255 / (maxp[c] - minp[c])
+            output[idx + c] = int(output[idx + c])
+    return Image.frombytes(image.mode, image.size, bytes(output))
