@@ -39,7 +39,7 @@ def apply_filter (image, x, y, filter):
         pixel += neighborhood[i] * filter.data[i]
     return pixel / filter.divisor
 
-def conv (image, filter):
+def conv (image, filter, normalize):
     bands = len(image.getbands())
     output = []
     minp, maxp = [0] * bands, [0] * bands
@@ -50,5 +50,7 @@ def conv (image, filter):
                 if pixel[c] < minp[c]: minp[c] = pixel[c]
                 if pixel[c] > maxp[c]: maxp[c] = pixel[c]
                 output.append(pixel[c])
-    change_interval(output, bands, (minp, maxp))
-    return Image.frombytes(image.mode, image.size, bytes(output))
+    if normalize:
+        change_interval(output, bands, (minp, maxp))
+        return Image.frombytes(image.mode, image.size, bytes(output))
+    return output
