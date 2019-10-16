@@ -15,6 +15,13 @@ class Filter:
         print(self.data)
         print(self.divisor)
 
+def change_interval (data, bands, ii):
+    for i in range(0, len(data), bands):
+        for c in range(bands):
+            data[i + c] = int(
+                (data[i + c] - ii[0][c]) * 255 / (ii[1][c] - ii[0][c])
+            )
+
 def get_neighborhood(image, x, y, dx, dy):
     neighborhood = []
     for y in range(y - dy, y + dy + 1):
@@ -43,9 +50,5 @@ def conv (image, filter):
                 if pixel[c] < minp[c]: minp[c] = pixel[c]
                 if pixel[c] > maxp[c]: maxp[c] = pixel[c]
                 output.append(pixel[c])
-    for idx in range(0, len(output), bands):
-        for c in range(bands):
-            output[idx + c] -= minp[c]
-            output[idx + c] *= 255 / (maxp[c] - minp[c])
-            output[idx + c] = int(output[idx + c])
+    change_interval(output, bands, (minp, maxp))
     return Image.frombytes(image.mode, image.size, bytes(output))
