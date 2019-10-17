@@ -1,31 +1,31 @@
 from PIL import Image
 
 def grayscale (image):
-    output, bands = [], len(image.getbands())
-    if bands == 1: return image
+    output, data, bands = [], image.tobytes(), len(image.getbands())
+    if bands < 3: return image
 
-    for y in range(image.height):
-        for x in range(image.width):
-            ipixel = image.getpixel((x, y))
-            opixel = 0
-            for c in range(bands):
-                opixel += ipixel[c]
-            output.append(int(opixel / bands))
+    for idx in range(0, len(data), bands):
+        pixel = data[idx]
+        pixel += data[idx+1]
+        pixel += data[idx+2]
+        output.append(int(pixel / 3))
+        for a in range(3, bands): output.append(data[idx+a])
+
     return Image.frombytes('L', image.size, bytes(output))
 
 def weighted_grayscale (image, weights):
-    output, bands = [], len(image.getbands())
-    if bands == 1: return image
-    if len(weights) != bands: raise IndexError("Unmathing weights and bands length")
-    if sum(weights) != 1: raise ArithmeticError("Non-normal weights")
+    output, data, bands = [], image.tobytes(), len(image.getbands())
+    if bands < 3: return image
+    if len(weights) != 3: raise ArithmeticError("Invalid number of weights")
+    if round(abs(sum(weights) - 0.00001)) != 1: raise ArithmeticError("Non-normal weights")
 
-    for y in range(image.height):
-        for x in range(image.width):
-            ipixel = image.getpixel((x, y))
-            opixel = 0
-            for c in range(bands):
-                opixel += ipixel[c] * weights[c]
-            output.append(int(opixel))
+    for idx in range(0, len(data), bands):
+        pixel = data[idx] * weights[0]
+        pixel += data[idx+1] * weights[1]
+        pixel += data[idx+2] * weights[2]
+        output.append(int(pixel))
+        for a in range(3, bands): output.append(data[idx+a])
+
     return Image.frombytes('L', image.size, bytes(output))
 
 def sepia (image):

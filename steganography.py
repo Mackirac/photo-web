@@ -1,4 +1,3 @@
-from math import floor
 from PIL import Image
 
 def to_bin (dec):
@@ -26,10 +25,10 @@ def hide_character (buffer, idx, character):
     return idx
 
 def hide_message (image, text):
-    mode, size, data, idx = im.mode, im.size, list(im.tobytes()), 0
+    data, idx = list(image.tobytes()), 0
     for c in bytes(text, 'utf8'): idx = hide_character(data, idx, c)
     hide_character(data, idx, 3)
-    return Image.frombytes(mode, size, bytes(data))
+    return Image.frombytes(image.mode, image.size, bytes(data))
 
 def seek_character (image, idx):
     if len(image) < idx + 8: return 3, 0
@@ -39,10 +38,11 @@ def seek_character (image, idx):
         idx += 1
     return to_dec(character), idx
 
-def seek (image):
+def seek_message (image):
     message, image = [], image.tobytes()
     character, idx = seek_character(image, 0)
     while character != 3:
         message.append(character)
         character, idx = seek_character(image, idx)
-    return bytes(message).decode('utf8')
+    try: return bytes(message).decode('utf8')
+    except UnicodeDecodeError: return None
