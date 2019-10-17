@@ -1,8 +1,9 @@
 import numpy as np
 from math import sqrt
 from PIL import Image
-from convolution import Filter, conv, change_interval
+from statistics import median
 from filters import GAUSSIAN as BLUR
+from convolution import Filter, conv, change_interval, get_neighborhood
 
 H = Filter(1, 1, [
     1, 0, -1,
@@ -44,4 +45,17 @@ def high_boost (image, k):
             if px > 255: px = 255
             output.append(px)
 
+    return Image.frombytes(image.mode, image.size, bytes(output))
+
+def nmedian (image, dx, dy):
+    output = []
+    for y in range(image.height):
+        for x in range(image.width):
+            neighborhood = get_neighborhood(image, x, y, dx, dy)
+            try:
+                neighborhood = zip(*neighborhood)
+                for c in neighborhood:
+                    output.append(int(median(c)))
+            except TypeError:
+                output.append(int(median(neighborhood)))
     return Image.frombytes(image.mode, image.size, bytes(output))
