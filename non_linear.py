@@ -17,9 +17,14 @@ V = Filter(1, 1, [
      1,  2,  1
 ], 1)
 
-def sobel (image):
-    imh = list(conv(image, H, True).tobytes())
-    imv = list(conv(image, V, True).tobytes())
+def sobel (image, normalize=True):
+    if normalize:
+        imh = list(conv(image, H, True).tobytes())
+        imv = list(conv(image, V, True).tobytes())
+    else:
+        imh = conv(image, H, False)
+        imv = conv(image, V, False)
+
     output, bands = [], len(image.getbands())
     minp, maxp = [0] * bands, [0] * bands
 
@@ -59,3 +64,10 @@ def nmedian (image, dx, dy):
             except TypeError:
                 output.append(int(median(neighborhood)))
     return Image.frombytes(image.mode, image.size, bytes(output))
+
+def binarize (image, threshold, gradient=False):
+    def filter (p):
+        if p >= threshold: return 255
+        else: return 0
+    if not gradient: image = sobel(image)
+    return image.point(filter)
