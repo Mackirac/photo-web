@@ -117,7 +117,17 @@ function median () {
 }
 
 function conv () {
-    console.log('conv')
+    document.querySelector('#panel').style.display = 'none';
+    let cells = document.querySelectorAll('.filter-cell');
+    let filter = { dx: dx, dy: dy, values: [] };
+    for (x = 0; x < cells.length - 1; x++) {
+        filter.values.push(Number(cells[x].value));
+    }
+    filter.divisor = Number(cells[cells.length - 1].value);
+    console.log(JSON.stringify(filter));
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/conv/' + JSON.stringify(filter));
 }
 
 function laplace1 () {

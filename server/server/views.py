@@ -4,8 +4,9 @@ from django.http import HttpResponse
 from io import BytesIO
 from PIL import Image
 import base64
+import json
 
-from .transformations.filters import MEAN, GAUSSIAN, LAPLACIAN1, LAPLACIAN2
+from .transformations.filters import Filter, MEAN, GAUSSIAN, LAPLACIAN1, LAPLACIAN2
 from .transformations import\
     intensity,\
     steganography,\
@@ -95,6 +96,13 @@ def equalize (request):
     b = decode_image(request.POST['image'])
     res = build_response(encode_image(histogram.equalize(b)))
     return res
+
+@csrf_exempt
+def conv (request, filter):
+    b = decode_image(request.POST['image'])
+    filter = json.loads(filter)
+    filter = Filter(filter['dx'], filter['dy'], filter['values'], filter['divisor'])
+    return build_response(encode_image(convolution.conv(b, filter, True)))
 
 @csrf_exempt
 def mean (request):

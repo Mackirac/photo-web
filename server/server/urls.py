@@ -28,6 +28,7 @@ urlpatterns = [
     path('seek', views.seek),
     path('hist', views.get_hist),
     path('equalize', views.equalize),
+    re_path(r'conv/(?P<filter>.*)', views.conv),
     path('mean', views.mean),
     path('gaussian', views.gaussian),
     path('median', views.median),

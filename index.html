@@ -134,7 +134,10 @@
 									font-weight-bold"
 								aria-haspopup="true"
 								aria-expanded="false"
-								onclick="conv()">Convolução</button>
+								onclick="document.querySelector('#panel').style.display = 'block'"
+						>
+							Convolução
+						</button>
 					</div>
 
 					<!-- PARTE 3B -->
@@ -321,11 +324,117 @@
 				</section>
 			</div>
 
+			<div id="panel">
+				<section>
+					<div>
+						Distância do Filtro em X: <span id="dx">0</span>
+						<button onclick="decreaseX(event)">-</button>
+						<button onclick="increaseX(event)">+</button>
+					</div>
+					<br />
+					<div>
+						Distância do Filtro em Y: <span id="dy">0</span>
+						<button onclick="decreaseY(event)">-</button>
+						<button onclick="increaseY(event)">+</button>
+					</div>
+					<br />
+				
+					<table>
+						<tr>
+							<td>
+								<table id="filter">
+									<tr class="filter-row">
+										<td><input type="number" value="1" class="filter-cell" /></td>
+									</tr>
+								</table>
+							</td>
+				
+							<td rowspan="3"> * 1/<input type="number" value="1" id="divisor" class="filter-cell" /></td>
+						</tr>
+					</table>
+				</section>
+
+				<button onclick="conv()">Confirmar</button>
+				<button
+					onclick="document.querySelector('#panel').style.display = 'none'"
+				>
+					Cancelar
+				</button>
+	
+				<script>
+					var dx = 0;
+					var dy = 0;
+					var divisor = 1;
+			
+					function createFilterRow() {
+						let row = document.createElement("tr");
+						row.classList.add("filter-row");
+						for (let x = 0; x < 2*dx + 1; x++) {
+							row.appendChild(createFilterCell());
+						}
+						return row;
+					}
+			
+					function createFilterCell() {
+						let cell = document.createElement("td");
+						let input = document.createElement("input");
+						input.type = "number";
+						input.classList.add("filter-cell");
+						input.value = 0;
+						cell.appendChild(input);
+						return cell;
+					}
+			
+					function increaseX(ev) {
+						dx += 1;
+						document.getElementById("dx").innerHTML = dx;
+			
+						let filter = document.getElementById("filter").children[0];
+						for (row of filter.children) {
+							row.children[0].insertAdjacentElement("beforeBegin", createFilterCell());
+							row.appendChild(createFilterCell());
+						}
+					}
+			
+					function decreaseX(ev) {
+						if (dx > 0) {
+							dx -= 1;
+			
+							let filter = document.getElementById("filter").children[0];
+							for (row of filter.children) {
+								row.removeChild(row.children[0]);
+								row.removeChild(row.lastChild);
+							}
+						}
+						document.getElementById("dx").innerHTML = dx;
+					}
+			
+					function increaseY(ev) {
+						dy += 1;
+						document.getElementById("dy").innerHTML = dy;
+			
+						let rows = document.getElementById("filter").children[0];
+						rows.children[0].insertAdjacentElement("beforebegin", createFilterRow());
+						rows.appendChild(createFilterRow());
+					}
+			
+					function decreaseY(ev) {
+						if (dy > 0) {
+							dy -= 1;
+			
+							let rows = document.getElementById("filter").children[0];
+							rows.removeChild(rows.firstChild);
+							rows.removeChild(rows.lastChild);
+						}
+						document.getElementById("dy").innerHTML = dy;
+					}
+				</script>
+			</div>
+	
 			<div class="card-footer">
 				<h6>&#169; Photoweb Team - MTE</h6>
 			</div>
 			
 		</section>
-
 	</body>
 </html>
