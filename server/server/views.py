@@ -9,6 +9,7 @@ from .transformations import\
     intensity,\
     histogram,\
     convolution,\
+    color,\
     non_linear
 
 def decode_image (image):
@@ -90,6 +91,26 @@ def laplace2 (request):
 def high_boost (request, k):
     b = decode_image(request.POST['image'])
     res = build_response(encode_image(non_linear.high_boost(b, k)))
+    return res
+
+@csrf_exempt
+def grayscale (request):
+    b = decode_image(request.POST['image'])
+    res = build_response(encode_image(color.grayscale(b)))
+    return res
+
+@csrf_exempt
+def weighted_grayscale (request, p1, p2, p3):
+    b = decode_image(request.POST['image'])
+    res = build_response(encode_image(color.weighted_grayscale(b, (
+        float(p1), float(p2), float(p3)
+    ))))
+    return res
+
+@csrf_exempt
+def sepia (request):
+    b = decode_image(request.POST['image'])
+    res = build_response(encode_image(color.sepia(b)))
     return res
 
 @csrf_exempt

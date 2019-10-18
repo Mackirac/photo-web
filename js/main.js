@@ -121,6 +121,30 @@ function high_boost () {
     send_request('http://localhost:8000/highboost/' + factor);
 }
 
+function grayscale () {
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/grayscale');
+}
+
+function weighted_grayscale () {
+    let weights = prompt(
+        "Pesos no formato 'p1, p2, p3' (a soma dos pesos DEVE ser igual a 1):"
+    );
+    weights = weights.replace(/\s/g, '').split(',');
+    updateImage();
+    getImageData();
+    send_request(
+        `http://localhost:8000/weighted_grayscale/${weights[0]}/${weights[1]}/${weights[2]}
+    `);
+}
+
+function sepia () {
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/sepia');
+}
+
 function geo_mean () {
     console.log('geo_mean')
 }

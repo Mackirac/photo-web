@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
@@ -31,6 +31,12 @@ urlpatterns = [
     path('laplace1', views.laplace1),
     path('laplace2', views.laplace2),
     path('highboost/<int:k>', views.high_boost),
+    path('grayscale', views.grayscale),
+    re_path(
+        r'weighted_grayscale/(?P<p1>0\.\d*)/(?P<p2>0\.\d*)/(?P<p3>0\.\d*)',
+        views.weighted_grayscale
+    ),
+    path('sepia', views.sepia),
     path('sobel', views.sobel),
     path('binarize/<int:threshold>', views.binarize)
 ]
