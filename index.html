@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="viewport"
+    		  content="width=device-width,
+    		  		   initial-scale=1,
+    		  		   shrink-to-fit=no">
+    	<link rel="stylesheet"
+    		  href="css/bootstrap.min.css">
+    	<link rel="stylesheet"
+    		  href="css/style.css">
+
+    	<script defer src="js/jquery-3.4.1.min.js"></script>
+    	<script defer src="js/popper.min.js"></script>
+		<script defer src="js/bootstrap.bundle.min.js"></script>
+		<script defer src="js/main.js"></script>
+
+    	<title>Photoweb</title>
+	</head>
+
+	<body>
+		<section class="card">
+			<div class="card-header
+						text-white
+						bg-dark">
+				<h4 class="font-weight-bold
+						   text-center">Photoweb</h4>				
+			</div>
+
+			<div class="card-body
+						bg-secondary">
+				<div class="row">
+					<!-- PARTE 1 -->
+					<div class="btn-group">
+						<button type="button"
+								class="btn
+									   btn-dark
+									   dropdown-toggle
+									   font-weight-bold"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">Filtros de Intensidade</button>
+						<div class="dropdown-menu"
+							 aria-labelledby="dropdownMenuButton">
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="negative()">Negativo</button>
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="log()">Logarítmo</button>
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="pot()">Potência</button>
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="parts()">Linear por Partes</button>
+		   
+						</div>						
+					</div>
+
+					<div class="btn-group">
+						<button type="button"
+								class="btn
+									   btn-dark
+									   dropdown-toggle
+									   font-weight-bold"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">Esteganografia</button>
+						<div class="dropdown-menu"
+							 aria-labelledby="dropdownMenuButton">
+
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="hide()">Procurar Texto</button> <!-- ??? -->
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="seek()">Esconder Texto</button> <!-- ??? -->   
+						</div>						
+					</div>
+
+					<!-- PARTE 2 -->
+					<div class="btn-group">
+						<button type="button"
+								class="btn
+									   btn-dark
+									   dropdown-toggle
+									   font-weight-bold"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">Equalização</button>
+						<div class="dropdown-menu"
+							 aria-labelledby="dropdownMenuButton">
+
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="get_hist()">Calcular Histograma</button> <!-- ??? -->
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="equalize()">Equalizar Histograma</button> <!-- ??? -->
+						</div>						
+					</div>
+
+					<!-- PARTE 3A -->
+					<div class="btn-group">
+						<button type="button"
+								class="btn
+									   btn-dark
+									   dropdown-toggle
+									   font-weight-bold"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">Suavização</button>
+						<div class="dropdown-menu"
+							 aria-labelledby="dropdownMenuButton">
+
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="mean()">Suavização média</button>
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="gauss()">Suavização Gaussiana</button>
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="median()">Mediana</button>
+						</div>						
+					</div>
+
+					<div>
+						<button type="button"
+								class="btn
+									btn-dark
+									font-weight-bold"
+								aria-haspopup="true"
+								aria-expanded="false"
+								onclick="conv()">Convolução</button>
+					</div>
+
+					<!-- PARTE 3B -->
+					<div class="btn-group">
+						<button type="button"
+								class="btn
+									   btn-dark
+									   dropdown-toggle
+									   font-weight-bold"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">Aguçamento</button>
+						<div class="dropdown-menu"
+							 aria-labelledby="dropdownMenuButton">
+
+							 <button class="dropdown-item"
+							   href="#"
+							   onclick="laplace1()">Laplace 1</button>
+
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="laplace2()">Laplace 2</button>
+
+							<div class="dropdown-divider"></div>
+
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="high_boost()">Nitidez High-Boost</button>							
+						</div>						
+					</div>
+
+					<!-- PARTE 4 -->
+					<div class="btn-group">
+						<button type="button"
+								class="btn
+									   btn-dark
+									   dropdown-toggle
+									   font-weight-bold"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">Domínio da Frequência</button>
+						<div class="dropdown-menu"
+							 aria-labelledby="dropdownMenuButton">
+
+							<button class="dropdown-item"
+							   href="#">Passa Alta</button> <!-- ??? -->
+							<button class="dropdown-item"
+							   href="#">Passa Baixa</button> <!-- ??? -->
+							<button class="dropdown-item"
+							   href="#">Passa Faixa</button> <!-- ??? -->
+
+							<div class="dropdown-divider"></div>
+
+							<button class="dropdown-item"
+							   href="#">Rejeita Alta</button> <!-- ??? -->
+							<button class="dropdown-item"
+							   href="#">Rejeita Baixa</button> <!-- ??? -->
+							<button class="dropdown-item"
+							   href="#">Rejeita Faixa</button> <!-- ??? -->
+
+							<div class="dropdown-divider"></div>
+
+							<button class="dropdown-item"
+							   href="#">Ideal</button> <!-- ??? -->
+							<button class="dropdown-item"
+							   href="#">Gaussiana</button> <!-- ??? -->						
+						</div>						
+					</div>
+
+					<!-- PARTE 6 -->
+					<div class="btn-group">
+						<button type="button"
+								class="btn
+									   btn-dark
+									   dropdown-toggle
+									   font-weight-bold"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">Fourier</button>
+						<div class="dropdown-menu"
+							 aria-labelledby="dropdownMenuButton">
+
+							<button class="dropdown-item"
+							   href="#">Transformada Discreta</button>
+
+							<div class="dropdown-divider"></div>
+
+							<button class="dropdown-item"
+							   href="#">Transformada Inversa</button>
+						</div>						
+					</div>
+
+					<!-- PARTE 7 -->
+					<div class="btn-group">
+						<button type="button"
+								class="btn
+									   btn-dark
+									   dropdown-toggle
+									   font-weight-bold"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">Restauração</button>
+						<div class="dropdown-menu"
+							 aria-labelledby="dropdownMenuButton">
+
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="geo_mean()">Média Geométrica</button>
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="harm_mean()">Harmônica</button>
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="ch_mean()">Contra-Harmônica</button>
+						</div>						
+					</div>
+
+					<div class="btn-group">
+						<button type="button"
+								class="btn
+									   btn-dark
+									   dropdown-toggle
+									   font-weight-bold"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">Filtros Não Lineares</button>
+						<div class="dropdown-menu"
+							 aria-labelledby="dropdownMenuButton">
+
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="sobel()">Sobel</button> <!-- ??? -->
+							<button class="dropdown-item"
+							   href="#"
+							   onclick="binarize()">Binarização</button>							
+						</div>						
+					</div>
+
+				</div>
+				
+			</div>
+
+			<div class="col bg-white">
+				<section class="row justify-content-center">
+					<input type="file" id="file_selector" />
+				</section>
+
+				<form
+					id="hidden_form"
+					method="post"
+					enctype="multipart/form-data"
+				>
+					<input type="hidden" name="image">
+				</form>
+
+				<section class="row justify-content-center">
+					<figure class="figure">
+						<img id="image" alt="Imagem">
+					</figure>
+				</section>
+			</div>
+
+			<div class="card-footer">
+				<h6>&#169; Photoweb Team - MTE</h6>
+			</div>
+			
+		</section>
+
+	</body>
+</html>

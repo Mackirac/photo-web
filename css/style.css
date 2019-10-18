@@ -1,0 +1,19 @@
+#clear, #insert {
+	background-color: white;
+}
+
+#insert:hover {
+	background-color: green;
+}
+
+#clear:hover {
+	background-color: gray;
+}
+
+.modal-title, .modal-body {
+    color: black;
+}
+
+.figure {
+	overflow: scroll;
+}
