@@ -71,3 +71,24 @@ def binarize (image, threshold, gradient=False):
         else: return 0
     if not gradient: image = sobel(image)
     return image.point(filter)
+
+def harm_mean (image):
+    output, bands = [], len(image.getbands())
+    minp, maxp = [0] * bands, [0] * bands
+    for y in range(image.height):
+        for x in range(image.width):
+            neighborhood = get_neighborhood(image, x, y, 1, 1)
+            px = [0] * bands
+            for p in neighborhood:
+                for c in range(bands):
+                    try: px[c] += 1/p[c]
+                    except IndexError: px[c] += 1/p
+                    except ZeroDivisionError: px[c] += 0
+            for c in range(bands):
+                try: px[c] = int(9 / px[c])
+                except ZeroDivisionError: px[c] = 0
+                if px[c] < minp[c]: minp[c] = px[c]
+                if px[c] > maxp[c]: maxp[c] = px[c]
+                output.append(px[c])
+    change_interval(output, bands, (minp[c],maxp[c]))
+    return Image.frombytes(image.mode, image.size, bytes(output))

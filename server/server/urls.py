@@ -22,8 +22,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('log', views.log),
     path('negative', views.negative),
-    path('pow/<int:factor>', views.pow),
+    re_path(r'pow/(?P<factor>\d+(\.\d+)?)', views.pow),
     path('parts/<int:Ii>/<int:If>/<int:Fi>/<int:Ff>', views.parts),
+    re_path(r'hide/(?P<text>.*)', views.hide),
+    path('seek', views.seek),
+    path('hist', views.get_hist),
     path('equalize', views.equalize),
     path('mean', views.mean),
     path('gaussian', views.gaussian),
@@ -38,5 +41,6 @@ urlpatterns = [
     ),
     path('sepia', views.sepia),
     path('sobel', views.sobel),
-    path('binarize/<int:threshold>', views.binarize)
+    path('binarize/<int:threshold>', views.binarize),
+    path('harm_mean', views.harm_mean)
 ]

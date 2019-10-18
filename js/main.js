@@ -63,15 +63,33 @@ function parts () {
 }
 
 function hide () {
-    console.log('hide')
+    let text = prompt("Texto a ser escondido:");
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/hide/' + text);
 }
 
 function seek () {
-    console.log('seek')
+    getImageData();
+    connection.onreadystatechange = function() {
+        if (this.status == 200 && this.readyState == 4) {
+            alert(this.responseText);
+        }
+    }
+    send_request('http://localhost:8000/seek')
 }
 
 function get_hist () {
-    console.log('get_hist')
+    getImageData();
+    connection.onreadystatechange = function() {
+        if (this.status == 200 && this.readyState == 4) {
+            let im = new Image();
+            im.src = 'data:image/png;base64,' + this.responseText;
+            var w = window.open('');
+            w.document.write(im.outerHTML);
+        }
+    }
+    send_request('http://localhost:8000/hist');
 }
 
 function equalize () {
@@ -150,7 +168,9 @@ function geo_mean () {
 }
 
 function harm_mean () {
-    console.log('harm_mean')
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/harm_mean');
 }
 
 function ch_mean () {

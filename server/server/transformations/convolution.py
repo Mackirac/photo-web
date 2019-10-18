@@ -18,9 +18,14 @@ class Filter:
 def change_interval (data, bands, ii):
     for i in range(0, len(data), bands):
         for c in range(bands):
-            data[i + c] = int(
-                (data[i + c] - ii[0][c]) * 255 / (ii[1][c] - ii[0][c])
-            )
+            try:
+                data[i + c] = int(
+                    (data[i + c] - ii[0][c]) * 255 / (ii[1][c] - ii[0][c])
+                )
+            except TypeError:
+                data[i] = int((data[i] - ii[0]) * 255 / (ii[1] - ii[0]))
+            except ValueError:
+                data[i] = 0
 
 def get_neighborhood(image, x, y, dx, dy):
     neighborhood = []

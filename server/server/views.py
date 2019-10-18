@@ -1,4 +1,5 @@
 from django.views.decorators.csrf import csrf_exempt
+from matplotlib import pyplot as plt
 from django.http import HttpResponse
 from io import BytesIO
 from PIL import Image
@@ -7,6 +8,7 @@ import base64
 from .transformations.filters import MEAN, GAUSSIAN, LAPLACIAN1, LAPLACIAN2
 from .transformations import\
     intensity,\
+    steganography,\
     histogram,\
     convolution,\
     color,\
@@ -42,13 +44,50 @@ def negative (request):
 @csrf_exempt
 def pow (request, factor):
     b = decode_image(request.POST['image'])
-    res = build_response(encode_image(intensity.ipow(b, factor)))
+    res = build_response(encode_image(intensity.ipow(b, float(factor))))
     return res
 
 @csrf_exempt
 def parts (request, Ii, If, Fi, Ff):
     b = decode_image(request.POST['image'])
     res = build_response(encode_image(intensity.modify_interval(b, (Ii, If), (Fi, Ff))))
+    return res
+
+@csrf_exempt
+def hide (request, text):
+    b = decode_image(request.POST['image'])
+    res = build_response(encode_image(steganography.hide_message(b, text)))
+    return res
+
+@csrf_exempt
+def seek (request):
+    b = decode_image(request.POST['image'])
+    res = build_response(steganography.seek_message(b))
+    res['Content-Type'] = 'text/plain'
+    return res
+
+@csrf_exempt
+def get_hist (request):
+    b = decode_image(request.POST['image'])
+    hist = histogram.get_histogram(b)
+    if len(hist) < 3:
+        plt.bar(range(256), hist[0])
+    else:
+        plt.subplot(131)
+        plt.bar(range(256), hist[0])
+        plt.subplot(132)
+        plt.bar(range(256), hist[1])
+        plt.subplot(133)
+        plt.bar(range(256), hist[2])
+
+    b = BytesIO()
+    fig = plt.gcf()
+    fig.set_size_inches(18, 8)
+    plt.savefig(b, dpi=100)
+    plt.clf()
+    plt.cla()
+    h = base64.b64encode(b.getvalue())
+    res = build_response(h)
     return res
 
 @csrf_exempt
@@ -123,4 +162,10 @@ def sobel (request):
 def binarize (request, threshold):
     b = decode_image(request.POST['image'])
     res = build_response(encode_image(non_linear.binarize(b, threshold)))
+    return res
+
+@csrf_exempt
+def harm_mean (request):
+    b = decode_image(request.POST['image'])
+    res = build_response(encode_image(non_linear.harm_mean(b)))
     return res
