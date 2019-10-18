@@ -20,5 +20,17 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index)
+    path('log', views.log),
+    path('negative', views.negative),
+    path('pow/<int:factor>', views.pow),
+    path('parts/<int:Ii>/<int:If>/<int:Fi>/<int:Ff>', views.parts),
+    path('equalize', views.equalize),
+    path('mean', views.mean),
+    path('gaussian', views.gaussian),
+    path('median', views.median),
+    path('laplace1', views.laplace1),
+    path('laplace2', views.laplace2),
+    path('highboost/<int:k>', views.high_boost),
+    path('sobel', views.sobel),
+    path('binarize/<int:threshold>', views.binarize)
 ]

@@ -1,4 +1,4 @@
-from convolution import Filter
+from .convolution import Filter
 
 MEAN = Filter(1, 1, [
     1, 1, 1,

@@ -11,7 +11,7 @@ inputReader.onload = function() {
 };
 
 file_selector.addEventListener('change', (ev) => {
-    if (this.value != undefined)
+    if (ev.target.value != undefined)
         inputReader.readAsDataURL(file_selector.files[0]);
 });
 
@@ -34,21 +34,32 @@ function updateImage () {
 }
 
 function negative () {
-    console.log('negative')
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/negative');
 }
 
 function log () {
     updateImage();
     getImageData();
-    send_request('http://localhost:8000');
+    send_request('http://localhost:8000/log');
 }
 
 function pot () {
-    console.log('pot')
+    let factor = prompt("Fator:");
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/pow/' + factor);
 }
 
 function parts () {
-    console.log('parts')
+    let input = prompt("Entre os intervalos no formato 'Ii, If, Fi, Ff'");
+    input = input.replace(/\s/g, '').split(',');
+    updateImage();
+    getImageData();
+    send_request(
+        `http://localhost:8000/parts/${input[0]}/${input[1]}/${input[2]}/${input[3]}`
+    );
 }
 
 function hide () {
@@ -64,19 +75,27 @@ function get_hist () {
 }
 
 function equalize () {
-    console.log('equalize')
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/equalize');
 }
 
 function mean () {
-    console.log('mean')
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/mean');
 }
 
 function gauss () {
-    console.log('gauss')
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/gaussian');
 }
 
 function median () {
-    console.log('median')
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/median');
 }
 
 function conv () {
@@ -84,15 +103,22 @@ function conv () {
 }
 
 function laplace1 () {
-    console.log('laplace1')
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/laplace1');
 }
 
 function laplace2 () {
-    console.log('laplace2')
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/laplace2');
 }
 
 function high_boost () {
-    console.log('high_boost')
+    let factor = prompt("Factor:");
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/highboost/' + factor);
 }
 
 function geo_mean () {
@@ -108,9 +134,14 @@ function ch_mean () {
 }
 
 function sobel () {
-    console.log('sobel')
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/sobel');
 }
 
 function binarize () {
-    console.log('binarize')
+    let threshold = prompt("Limiar:");
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000/binarize/' + threshold);
 }

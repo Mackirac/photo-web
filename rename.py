@@ -1,6 +1,6 @@
 import os, re
 
-pattern = re.compile("Fig\d{4}\(.\)\((.*)\)\.tif")
+pattern = re.compile(r"Fig\d{4}\(.\)\((.*)\)\.tif")
 
 for f in os.listdir('./images'):
     match = pattern.findall(f)

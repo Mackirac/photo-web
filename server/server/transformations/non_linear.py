@@ -2,8 +2,8 @@ import numpy as np
 from math import sqrt
 from PIL import Image
 from statistics import median
-from filters import GAUSSIAN as BLUR
-from convolution import Filter, conv, change_interval, get_neighborhood
+from .filters import GAUSSIAN as BLUR
+from .convolution import Filter, conv, change_interval, get_neighborhood
 
 H = Filter(1, 1, [
     1, 0, -1,
