@@ -1,30 +1,36 @@
 var inputReader = new FileReader();
-var imageReader = new FileReader();
 var connection = new XMLHttpRequest();
 var image = document.querySelector('#image');
-var imageBytes = '';
-var file = document.querySelector('#file_selector');
+var file_selector = document.querySelector('#file_selector');
+var hidden_input = document.querySelector('#hidden_form input');
 
-file.value = '';
+file_selector.value = null;
 
 inputReader.onload = function() {
     image.src = this.result
 };
 
-imageReader.onload = function() {
-    imageBytes = this.result;
-}
-
-file.addEventListener('change', (ev) => {
-    inputReader.readAsDataURL(file.files[0]);
+file_selector.addEventListener('change', (ev) => {
+    if (this.value != undefined)
+        inputReader.readAsDataURL(file_selector.files[0]);
 });
 
-function open_request (url) {
+function send_request (url) {
+    let form = new FormData(document.querySelector('#hidden_form'));
     connection.open('POST', url, false);
+    connection.send(form);
 }
 
 function getImageData () {
-    return image.src.split(',')[1];
+    hidden_input.value = image.src.split(',')[1];
+}
+
+function updateImage () {
+    connection.onreadystatechange = function (event) {
+        if (this.status == 200 && this.readyState == 4) {
+            image.src = 'data:image/png;base64,' + this.response;
+        }
+    }
 }
 
 function negative () {
@@ -32,7 +38,9 @@ function negative () {
 }
 
 function log () {
-    console.log('log')
+    updateImage();
+    getImageData();
+    send_request('http://localhost:8000');
 }
 
 function pot () {
