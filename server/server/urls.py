@@ -43,5 +43,6 @@ urlpatterns = [
     path('sepia', views.sepia),
     path('sobel', views.sobel),
     path('binarize/<int:threshold>', views.binarize),
-    path('harm_mean', views.harm_mean)
+    path('harm_mean', views.harm_mean),
+    path('chromakey', views.chromakey)
 ]

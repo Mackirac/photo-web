@@ -33,6 +33,103 @@ function updateImage () {
     }
 }
 
+function rgb_to_hsv () {
+    let rgb = prompt('Entre os componentes rgb separados por vírgula').trim().split(',');
+    let r = Number(rgb[0]);
+    let g = Number(rgb[1]);
+    let b = Number(rgb[2]);
+    let max = Math.max(r, g, b);
+    let min = Math.min(r, g, b)
+
+    let h = 0;
+    let s = 0;
+    let v = 0;
+
+    if (max == r && g >= b) {
+        h = Math.round(60 * (g - b) / (max - min));
+    }
+    else if (max == r && g < b) {
+        h = Math.round(360 + 60 * (g - b) / (max - min));
+    }
+    else if (max == g) {
+        h = Math.round(120 + 60 * (b - r) / (max - min));
+    }
+    else if (max == b) {
+        h = Math.round(240 + 60 * (r - g) / (max - min));
+    }
+    if (isNaN(h)) { h = 0; }
+
+    s = 100 * (max - min) / max;
+    if (isNaN(s)) { s = 0; }
+
+    v = max * 100 / 255;
+
+    alert(`H = ${h}, S = ${s}%, V = ${v}%`);
+}
+
+function hsv_to_rgb () {
+    let hsv = prompt('Entre os valores hsv separados por vírgula').trim().split(',');
+    let h = Number(hsv[0]);
+    let s = Number(hsv[1]) / 100;
+    let v = Number(hsv[2]) / 100;
+
+    let r = 0;
+    let g = 0;
+    let b = 0;
+
+    let hi = Math.floor(h / 60) % 6;
+    let f = (h / 60) - hi;
+    let p = v * (1 - s);
+    let q = v * (1 - f*s);
+    let t = v * (1 - (1 - f)*s);
+
+    if (hi == 0) {
+        r = v;
+        g = t;
+        b = p;
+    }
+    else if (hi == 1) {
+        r = q;
+        g = v;
+        b = p;
+    }
+    else if (hi == 2) {
+        r = p;
+        g = v;
+        b = t;
+    }
+    else if (hi == 3) {
+        r = p;
+        g = q;
+        b = v;
+    }
+    else if (hi == 4) {
+        r = t;
+        g = p;
+        b = v;
+    }
+    else if (hi == 5) {
+        r = v;
+        g = p;
+        b = q;
+    }
+
+    r = Math.round(255 * r);
+    g = Math.round(255 * g);
+    b = Math.round(255 * b);
+
+    alert(`R = ${r}, G = ${g}, B = ${b}`);
+}
+
+// function chromakey(event) {
+//     if (event.target.value != undefined) {
+//         event.target.form = hidden_input.parentElement;
+//         // updateImage();
+//         getImageData();
+//         send_request('http://localhost:8000/chromakey');
+//     }
+// }
+
 function negative () {
     updateImage();
     getImageData();

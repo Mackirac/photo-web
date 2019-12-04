@@ -300,6 +300,44 @@
 						</div>						
 					</div>
 
+					<div class="btn-group">
+						<button type="button"
+								class="btn
+									   btn-dark
+									   dropdown-toggle
+									   font-weight-bold"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">Chroma-Key</button>
+						<div class="dropdown-menu"
+							aria-labelledby="dropdownMenuButton">
+
+							<input type="file" name="chromakey" onchange="chromakey(event)" />
+						</div>
+					</div>
+
+					<div class="btn-group">
+						<button type="button"
+								class="btn
+									   btn-dark
+									   dropdown-toggle
+									   font-weight-bold"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">RGB x HSV</button>
+
+							<div class="dropdown-menu"
+							aria-labelledby="dropdownMenuButton">
+
+								<button class="dropdown-item"
+								href="#"
+								onclick="rgb_to_hsv()">RGB para HSV</button> <!-- ??? -->
+								<button class="dropdown-item"
+								href="#"
+								onclick="hsv_to_rgb()">HSV para RGB</button>							
+							</div>
+					</div>
+
 				</div>
 				
 			</div>

@@ -177,3 +177,8 @@ def harm_mean (request):
     b = decode_image(request.POST['image'])
     res = build_response(encode_image(non_linear.harm_mean(b)))
     return res
+
+@csrf_exempt
+def chromakey (request):
+    print(len(request.POST))
+    return HttpResponse()
