@@ -1,0 +1,69 @@
+#navbar {
+    padding: .5% 5% .5% 5%;
+}
+
+#brand {
+    font-family: "Fira Code";
+    font-size: 22px;
+}
+
+#search-field {
+    text-align: center;
+}
+
+#navbar-buttons {
+    margin-left: 0%;
+}
+
+#edit-base {
+	border: 4px solid #ededed;
+	font-family: "Fira Code";
+}
+
+#clear, #insert {
+	background-color: white;
+}
+
+#insert:hover {
+	background-color: green;
+}
+
+#clear:hover {
+	background-color: gray;
+}
+
+.modal-title, .modal-body {
+    color: black;
+}
+
+.figure {
+	overflow: scroll;
+}
+
+#panel {
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: white;
+}
+
+/* #dx, #dy {
+	width: 10px;
+}
+
+table input[type=number]::-webkit-inner-spin-button,
+table input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+}
+
+#filter {
+	border: solid black 1px;
+}
+
+.filter-cell {
+	width: 30px;
+	text-align: center;
+} */

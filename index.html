@@ -9,470 +9,440 @@
     	<link rel="stylesheet"
     		  href="css/bootstrap.min.css">
     	<link rel="stylesheet"
-    		  href="css/style.css">
+    		  type="text/css"
+    		  href="css/edits.css">
+
+    	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+			  rel="stylesheet">
+    	<link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap"
+    	 	  rel="stylesheet">
 
     	<script defer src="js/jquery-3.4.1.min.js"></script>
     	<script defer src="js/popper.min.js"></script>
 		<script defer src="js/bootstrap.bundle.min.js"></script>
 		<script defer src="js/main.js"></script>
 
-    	<title>Photoweb</title>
+    	<title>instadev EDITOR</title>
 	</head>
 
 	<body>
-		<section class="card">
-			<div class="card-header
-						text-white
-						bg-dark">
-				<h4 class="font-weight-bold
-						   text-center">Photoweb</h4>				
-			</div>
 
-			<div class="card-body
-						bg-secondary">
-				<div class="row">
-					<!-- PARTE 1 -->
-					<div class="btn-group">
-						<button type="button"
-								class="btn
-									   btn-dark
-									   dropdown-toggle
-									   font-weight-bold"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false">Filtros de Intensidade</button>
-						<div class="dropdown-menu"
-							 aria-labelledby="dropdownMenuButton">
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="negative()">Negativo</button>
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="log()">Logarítmo</button>
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="pot()">Potência</button>
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="parts()">Linear por Partes</button>
-		   
-						</div>						
-					</div>
+		<nav id="navbar"
+  		 class="navbar navbar-expand-lg navbar-light bg-light">
 
-					<div class="btn-group">
-						<button type="button"
-								class="btn
-									   btn-dark
-									   dropdown-toggle
-									   font-weight-bold"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false">Esteganografia</button>
-						<div class="dropdown-menu"
-							 aria-labelledby="dropdownMenuButton">
+	  		<a id="brand"
+	  		   class="navbar-brand"
+	  		   href="#">instadev</a>
 
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="seek()">Procurar Texto</button> <!-- ??? -->
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="hide()">Esconder Texto</button> <!-- ??? -->   
-						</div>						
-					</div>
+	  		<button class="navbar-toggler"
+	  				type="button"
+	  				data-toggle="collapse"
+	  				data-target="#navbarSupportedContent"
+	  				aria-controls="navbarSupportedContent"
+	  				aria-expanded="false"
+	  				aria-label="Toggle navigation">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
 
-					<!-- PARTE 2 -->
-					<div class="btn-group">
-						<button type="button"
-								class="btn
-									   btn-dark
-									   dropdown-toggle
-									   font-weight-bold"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false">Equalização</button>
-						<div class="dropdown-menu"
-							 aria-labelledby="dropdownMenuButton">
+	        <div class="collapse navbar-collapse"
+	        	 id="navbarSupportedContent">
 
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="get_hist()">Calcular Histograma</button> <!-- ??? -->
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="equalize()">Equalizar Histograma</button> <!-- ??? -->
-						</div>						
-					</div>
+	        	 <div class="d-flex justify-content-center ml-auto">
+	                <form class="form-inline">
+	                    <input id="search-field" 
+	                    	   class="form-control form-control-sm"
+	                    	   type="search"
+	                    	   placeholder="Search"
+	                    	   aria-label="Search">
+	                </form>
+	            </div>
 
-					<!-- PARTE 3A -->
-					<div class="btn-group">
-						<button type="button"
-								class="btn
-									   btn-dark
-									   dropdown-toggle
-									   font-weight-bold"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false">Suavização</button>
-						<div class="dropdown-menu"
-							 aria-labelledby="dropdownMenuButton">
+	            <div id="navbar-buttons"
+	                 class="btn-group d-flex justify-content-center ml-auto"
+	                 role="group"
+	                 aria-label="Basic example">
 
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="mean()">Suavização média</button>
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="gauss()">Suavização Gaussiana</button>
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="median()">Mediana</button>
-						</div>						
-					</div>
+	                <button type="button"
+	                		class="btn btn-sm btn-outline-light">
+	                    <a href="newpost.html">
+	                        <img src="img/icons/newpost.png">
+	                    </a>
+	                </button>
 
-					<div>
-						<button type="button"
-								class="btn
-									btn-dark
-									font-weight-bold"
-								aria-haspopup="true"
-								aria-expanded="false"
-								onclick="document.querySelector('#panel').style.display = 'block'"
-						>
-							Convolução
-						</button>
-					</div>
+	                <button type="button"
+	                		class="btn btn-sm btn-outline-light">
+	                    <img src="img/icons/notifications.png">
+	                </button>
 
-					<!-- PARTE 3B -->
-					<div class="btn-group">
-						<button type="button"
-								class="btn
-									   btn-dark
-									   dropdown-toggle
-									   font-weight-bold"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false">Aguçamento</button>
-						<div class="dropdown-menu"
-							 aria-labelledby="dropdownMenuButton">
+	                <button type="button"
+	                		class="btn btn-sm btn-outline-light">
+	                    <img src="img/icons/profile.png">
+	                </button>
+	            </div>
+	        </div>
+  		</nav>
 
-							 <button class="dropdown-item"
-							   href="#"
-							   onclick="laplace1()">Laplace 1</button>
+  		</br>
 
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="laplace2()">Laplace 2</button>
+  		<div class="container">
+  			<div class="row justify-content-center">
 
-							<div class="dropdown-divider"></div>
+				<section id="edit-base"
+						 class="card border-secondary">
 
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="high_boost()">Nitidez High-Boost</button>							
-						</div>						
-					</div>
-
-					<!-- PARTE 4 -->
-					<div class="btn-group">
-						<button type="button"
-								class="btn
-									   btn-dark
-									   dropdown-toggle
-									   font-weight-bold"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false">Domínio da Frequência</button>
-						<div class="dropdown-menu"
-							 aria-labelledby="dropdownMenuButton">
-
-							<button class="dropdown-item"
-							   href="#">Passa Alta</button> <!-- ??? -->
-							<button class="dropdown-item"
-							   href="#">Passa Baixa</button> <!-- ??? -->
-							<button class="dropdown-item"
-							   href="#">Passa Faixa</button> <!-- ??? -->
-
-							<div class="dropdown-divider"></div>
-
-							<button class="dropdown-item"
-							   href="#">Rejeita Alta</button> <!-- ??? -->
-							<button class="dropdown-item"
-							   href="#">Rejeita Baixa</button> <!-- ??? -->
-							<button class="dropdown-item"
-							   href="#">Rejeita Faixa</button> <!-- ??? -->
-
-							<div class="dropdown-divider"></div>
-
-							<button class="dropdown-item"
-							   href="#">Ideal</button> <!-- ??? -->
-							<button class="dropdown-item"
-							   href="#">Gaussiana</button> <!-- ??? -->						
-						</div>						
-					</div>
-
-					<!-- PARTE 6 -->
-					<div class="btn-group">
-						<button type="button"
-								class="btn
-									   btn-dark
-									   dropdown-toggle
-									   font-weight-bold"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false">Fourier</button>
-						<div class="dropdown-menu"
-							 aria-labelledby="dropdownMenuButton">
-
-							<button class="dropdown-item"
-							   href="#">Transformada Discreta</button>
-
-							<div class="dropdown-divider"></div>
-
-							<button class="dropdown-item"
-							   href="#">Transformada Inversa</button>
-						</div>						
-					</div>
-
-					<div class="btn-group">
-							<button type="button"
-									class="btn
-										   btn-dark
-										   dropdown-toggle
-										   font-weight-bold"
-									data-toggle="dropdown"
-									aria-haspopup="true"
-									aria-expanded="false">Cores</button>
-							<div class="dropdown-menu"
-								 aria-labelledby="dropdownMenuButton">
-	
-								<button class="dropdown-item"
-								   href="#"
-								   onclick="grayscale()">Escala de Cinza</button>
-								<button class="dropdown-item"
-								   href="#"
-								   onclick="weighted_grayscale()">Escala de Cinza Ponderada</button>
-								<button class="dropdown-item"
-								   href="#"
-								   onclick="sepia()">Sépia</button>
-							</div>						
-						</div>
-	
-					<!-- PARTE 7 -->
-					<div class="btn-group">
-						<button type="button"
-								class="btn
-									   btn-dark
-									   dropdown-toggle
-									   font-weight-bold"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false">Restauração</button>
-						<div class="dropdown-menu"
-							 aria-labelledby="dropdownMenuButton">
-
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="geo_mean()">Média Geométrica</button>
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="harm_mean()">Harmônica</button>
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="ch_mean()">Contra-Harmônica</button>
-						</div>						
-					</div>
-
-					<div class="btn-group">
-						<button type="button"
-								class="btn
-									   btn-dark
-									   dropdown-toggle
-									   font-weight-bold"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false">Filtros Não Lineares</button>
-						<div class="dropdown-menu"
-							 aria-labelledby="dropdownMenuButton">
-
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="sobel()">Sobel</button> <!-- ??? -->
-							<button class="dropdown-item"
-							   href="#"
-							   onclick="binarize()">Binarização</button>							
-						</div>						
-					</div>
-
-					<div class="btn-group">
-						<button type="button"
-								class="btn
-									   btn-dark
-									   dropdown-toggle
-									   font-weight-bold"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false">Chroma-Key</button>
-						<div class="dropdown-menu"
-							aria-labelledby="dropdownMenuButton">
-
-							<input type="file" name="chromakey" onchange="chromakey(event)" />
-						</div>
-					</div>
-
-					<div class="btn-group">
-						<button type="button"
-								class="btn
-									   btn-dark
-									   dropdown-toggle
-									   font-weight-bold"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false">RGB x HSV</button>
-
-							<div class="dropdown-menu"
-							aria-labelledby="dropdownMenuButton">
-
-								<button class="dropdown-item"
-								href="#"
-								onclick="rgb_to_hsv()">RGB para HSV</button> <!-- ??? -->
-								<button class="dropdown-item"
-								href="#"
-								onclick="hsv_to_rgb()">HSV para RGB</button>							
+				 	<div class="card-header">
+				 		<div class="row">
+				 			<div class="btn-group">
+								<button type="button"
+										class="btn
+											   btn-secondary
+											   dropdown-toggle
+											   font-weight-bold"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false">Filtros de Intensidade</button>
+								<div class="dropdown-menu"
+									 aria-labelledby="dropdownMenuButton">
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="negative()">Negativo</button>
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="log()">Logarítmo</button>
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="pot()">Potência</button>
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="parts()">Linear por Partes</button>
+								</div>						
 							</div>
-					</div>
 
-				</div>
-				
-			</div>
+							<div class="btn-group">
+								<button type="button"
+										class="btn
+											   btn-secondary
+											   dropdown-toggle
+											   font-weight-bold"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false">Esteganografia</button>
+								<div class="dropdown-menu"
+									 aria-labelledby="dropdownMenuButton">
 
-			<div class="col bg-white">
-				<section class="row justify-content-center">
-					<input type="file" id="file_selector" />
-				</section>
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="seek()">Procurar Texto</button> <!-- ??? -->
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="hide()">Esconder Texto</button> <!-- ??? -->   
+								</div>						
+							</div>
 
-				<form
-					id="hidden_form"
-					method="post"
-					enctype="multipart/form-data"
-				>
-					<input type="hidden" name="image">
-				</form>
+							<div class="btn-group">
+								<button type="button"
+										class="btn
+											   btn-secondary
+											   dropdown-toggle
+											   font-weight-bold"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false">Equalização</button>
+								<div class="dropdown-menu"
+									 aria-labelledby="dropdownMenuButton">
 
-				<section class="row justify-content-center">
-					<figure class="figure">
-						<img id="image" alt="Imagem">
-					</figure>
-				</section>
-			</div>
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="get_hist()">Calcular Histograma</button> <!-- ??? -->
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="equalize()">Equalizar Histograma</button> <!-- ??? -->
+								</div>						
+							</div>
 
-			<div id="panel">
-				<section>
-					<div>
-						Distância do Filtro em X: <span id="dx">0</span>
-						<button onclick="decreaseX(event)">-</button>
-						<button onclick="increaseX(event)">+</button>
-					</div>
-					<br />
-					<div>
-						Distância do Filtro em Y: <span id="dy">0</span>
-						<button onclick="decreaseY(event)">-</button>
-						<button onclick="increaseY(event)">+</button>
-					</div>
-					<br />
-				
-					<table>
-						<tr>
-							<td>
-								<table id="filter">
-									<tr class="filter-row">
-										<td><input type="number" value="1" class="filter-cell" /></td>
+							<div class="btn-group">
+								<button type="button"
+										class="btn
+											   btn-secondary
+											   dropdown-toggle
+											   font-weight-bold"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false">Suavização</button>
+								<div class="dropdown-menu"
+									 aria-labelledby="dropdownMenuButton">
+
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="mean()">Suavização média</button>
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="gauss()">Suavização Gaussiana</button>
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="median()">Mediana</button>
+								</div>						
+							</div>
+
+							<div>
+								<button type="button"
+										class="btn
+											btn-secondary
+											font-weight-bold"
+										aria-haspopup="true"
+										aria-expanded="false"
+										onclick="document.querySelector('#panel').style.display = 'block'"
+								>Convolução</button>
+							</div>
+
+							<div class="btn-group">
+								<button type="button"
+										class="btn
+											   btn-secondary
+											   dropdown-toggle
+											   font-weight-bold"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false">Aguçamento</button>
+								<div class="dropdown-menu"
+									 aria-labelledby="dropdownMenuButton">
+
+									 <button class="dropdown-item"
+									   href="#"
+									   onclick="laplace1()">Laplace 1</button>
+
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="laplace2()">Laplace 2</button>
+
+									<div class="dropdown-divider"></div>
+
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="high_boost()">Nitidez High-Boost</button>
+								</div>						
+							</div>
+
+							<div class="btn-group">
+								<button type="button"
+										class="btn
+											   btn-secondary
+											   dropdown-toggle
+											   font-weight-bold"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false">Cores</button>
+								<div class="dropdown-menu"
+									 aria-labelledby="dropdownMenuButton">
+		
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="grayscale()">Escala de Cinza</button>
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="weighted_grayscale()">Escala de Cinza Ponderada</button>
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="sepia()">Sépia</button>
+								</div>						
+							</div>
+
+							<div class="btn-group">
+								<button type="button"
+										class="btn
+											   btn-secondary
+											   dropdown-toggle
+											   font-weight-bold"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false">Restauração</button>
+								<div class="dropdown-menu"
+									 aria-labelledby="dropdownMenuButton">
+
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="geo_mean()">Média Geométrica</button>
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="harm_mean()">Harmônica</button>
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="ch_mean()">Contra-Harmônica</button>
+								</div>						
+							</div>
+
+							<div class="btn-group">
+								<button type="button"
+										class="btn
+											   btn-secondary
+											   dropdown-toggle
+											   font-weight-bold"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false">Filtros Não Lineares</button>
+								<div class="dropdown-menu"
+									 aria-labelledby="dropdownMenuButton">
+
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="sobel()">Sobel</button> <!-- ??? -->
+									<button class="dropdown-item"
+									   href="#"
+									   onclick="binarize()">Binarização</button>							
+								</div>						
+							</div>
+
+
+							<div class="btn-group">
+								<button type="button"
+										class="btn
+											   btn-secondary
+											   dropdown-toggle
+											   font-weight-bold"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false">RGB x HSV</button>
+
+								<div class="dropdown-menu"
+								aria-labelledby="dropdownMenuButton">
+
+									<button class="dropdown-item"
+									href="#"
+									onclick="rgb_to_hsv()">RGB para HSV</button> <!-- ??? -->
+									<button class="dropdown-item"
+									href="#"
+									onclick="hsv_to_rgb()">HSV para RGB</button>							
+								</div>
+							</div>
+
+				 		</div>
+				 	</div>
+
+				 	<section class="card-body">
+				 		<div class="col bg-white">
+							<section class="row justify-content-center">
+								<input type="file" id="file_selector"/>
+							</section>
+
+							<form
+								id="hidden_form"
+								method="post"
+								enctype="multipart/form-data">
+								<input type="hidden" name="image">
+							</form>
+
+							<section class="row justify-content-center">
+								<figure class="figure">
+									<img id="image" alt="Imagem">
+								</figure>
+							</section>
+						</div>
+
+						<div id="panel">
+							<section>
+								<div>
+									Distância do Filtro em X: <span id="dx">0</span>
+									<button onclick="decreaseX(event)">-</button>
+									<button onclick="increaseX(event)">+</button>
+								</div>
+								<br />
+								<div>
+									Distância do Filtro em Y: <span id="dy">0</span>
+									<button onclick="decreaseY(event)">-</button>
+									<button onclick="increaseY(event)">+</button>
+								</div>
+								<br />
+							
+								<table>
+									<tr>
+										<td>
+											<table id="filter">
+												<tr class="filter-row">
+													<td><input type="number" value="1" class="filter-cell" /></td>
+												</tr>
+											</table>
+										</td>
+							
+										<td rowspan="3"> * 1/<input type="number" value="1" id="divisor" class="filter-cell" /></td>
 									</tr>
 								</table>
-							</td>
-				
-							<td rowspan="3"> * 1/<input type="number" value="1" id="divisor" class="filter-cell" /></td>
-						</tr>
-					</table>
-				</section>
+							</section>
 
-				<button onclick="conv()">Confirmar</button>
-				<button
-					onclick="document.querySelector('#panel').style.display = 'none'"
-				>
-					Cancelar
-				</button>
+							<button onclick="conv()">Confirmar</button>
+							<button onclick="document.querySelector('#panel').style.display = 'none'">Cancelar</button>
 	
-				<script>
-					var dx = 0;
-					var dy = 0;
-					var divisor = 1;
-			
-					function createFilterRow() {
-						let row = document.createElement("tr");
-						row.classList.add("filter-row");
-						for (let x = 0; x < 2*dx + 1; x++) {
-							row.appendChild(createFilterCell());
-						}
-						return row;
-					}
-			
-					function createFilterCell() {
-						let cell = document.createElement("td");
-						let input = document.createElement("input");
-						input.type = "number";
-						input.classList.add("filter-cell");
-						input.value = 0;
-						cell.appendChild(input);
-						return cell;
-					}
-			
-					function increaseX(ev) {
-						dx += 1;
-						document.getElementById("dx").innerHTML = dx;
-			
-						let filter = document.getElementById("filter").children[0];
-						for (row of filter.children) {
-							row.children[0].insertAdjacentElement("beforeBegin", createFilterCell());
-							row.appendChild(createFilterCell());
-						}
-					}
-			
-					function decreaseX(ev) {
-						if (dx > 0) {
-							dx -= 1;
-			
-							let filter = document.getElementById("filter").children[0];
-							for (row of filter.children) {
-								row.removeChild(row.children[0]);
-								row.removeChild(row.lastChild);
-							}
-						}
-						document.getElementById("dx").innerHTML = dx;
-					}
-			
-					function increaseY(ev) {
-						dy += 1;
-						document.getElementById("dy").innerHTML = dy;
-			
-						let rows = document.getElementById("filter").children[0];
-						rows.children[0].insertAdjacentElement("beforebegin", createFilterRow());
-						rows.appendChild(createFilterRow());
-					}
-			
-					function decreaseY(ev) {
-						if (dy > 0) {
-							dy -= 1;
-			
-							let rows = document.getElementById("filter").children[0];
-							rows.removeChild(rows.firstChild);
-							rows.removeChild(rows.lastChild);
-						}
-						document.getElementById("dy").innerHTML = dy;
-					}
-				</script>
-			</div>
-	
-			<div class="card-footer">
-				<h6>&#169; Photoweb Team - MTE</h6>
-			</div>
-			
-		</section>
+							<script>
+								var dx = 0;
+								var dy = 0;
+								var divisor = 1;
+						
+								function createFilterRow() {
+									let row = document.createElement("tr");
+									row.classList.add("filter-row");
+									for (let x = 0; x < 2*dx + 1; x++) {
+										row.appendChild(createFilterCell());
+									}
+									return row;
+								}
+						
+								function createFilterCell() {
+									let cell = document.createElement("td");
+									let input = document.createElement("input");
+									input.type = "number";
+									input.classList.add("filter-cell");
+									input.value = 0;
+									cell.appendChild(input);
+									return cell;
+								}
+						
+								function increaseX(ev) {
+									dx += 1;
+									document.getElementById("dx").innerHTML = dx;
+						
+									let filter = document.getElementById("filter").children[0];
+									for (row of filter.children) {
+										row.children[0].insertAdjacentElement("beforeBegin", createFilterCell());
+										row.appendChild(createFilterCell());
+									}
+								}
+						
+								function decreaseX(ev) {
+									if (dx > 0) {
+										dx -= 1;
+						
+										let filter = document.getElementById("filter").children[0];
+										for (row of filter.children) {
+											row.removeChild(row.children[0]);
+											row.removeChild(row.lastChild);
+										}
+									}
+									document.getElementById("dx").innerHTML = dx;
+								}
+						
+								function increaseY(ev) {
+									dy += 1;
+									document.getElementById("dy").innerHTML = dy;
+						
+									let rows = document.getElementById("filter").children[0];
+									rows.children[0].insertAdjacentElement("beforebegin", createFilterRow());
+									rows.appendChild(createFilterRow());
+								}
+						
+								function decreaseY(ev) {
+									if (dy > 0) {
+										dy -= 1;
+						
+										let rows = document.getElementById("filter").children[0];
+										rows.removeChild(rows.firstChild);
+										rows.removeChild(rows.lastChild);
+									}
+									document.getElementById("dy").innerHTML = dy;
+								}
+							</script>
+						</div>
+				 	</section>
+				</section>
+  			</div>
+  		</div>
 	</body>
 </html>
